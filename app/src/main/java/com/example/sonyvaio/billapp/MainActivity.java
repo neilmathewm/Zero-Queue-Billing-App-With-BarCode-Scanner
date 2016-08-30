@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -69,6 +71,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //set title bar content and hide icon
+        getActionBar().setTitle(Html.fromHtml("<font color='#ffffff'><b>SCAN & PAY </b></font>"));
+        getActionBar().setIcon(
+                new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -125,6 +135,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_about) {
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -481,6 +495,10 @@ total=0;
         carttxt.setText(carttxt.getText()+"----------------------------------------\n");
         carttxt.setText(carttxt.getText()+" Total  = Rs "+total);
         }
+    public void proceed_payment(View view)
+    {
 
+        setContentView(R.layout.actionbar_tab_3);
+    }
 
 }
