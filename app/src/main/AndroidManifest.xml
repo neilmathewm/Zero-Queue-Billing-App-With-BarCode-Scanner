@@ -33,7 +33,9 @@
         <activity android:name=".Main2Activity" />
         <activity
             android:name=".offerpage"
-            android:label="@string/title_activity_offerpage"></activity>
+            android:label="@string/title_activity_offerpage" />
+        <activity android:name=".aboutpage" />
+        <activity android:name=".payement"></activity>
     </application>
 
 </manifest>

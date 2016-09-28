@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     private Button scanBtn;
     private TextView formatTxt, contentTxt,itemTxt,carttxt;
-    public int a=-1,i,total=0,item_size=0;
+    public int a=-1,i,total=0,item_size=0,no_item=0;
 
     private String[] items = new String[20];
     public String[] codes = {"8901030554667", "8901361300889", "U1403085","700465747143","U1402016","8902361042021"};
@@ -108,8 +108,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         final int[] ICONS = new int[] {
                 R.mipmap.add1,
                 R.mipmap.crt1,
-                R.mipmap.crt1,
-                R.mipmap.crt1,
+
         };
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -303,13 +302,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 for (i = 0; i < codes.length; i++) {
                     if (scanContent.equals(codes[i])) {
                         p = 1;
+                        no_item=no_item+1;
 
                        // contentTxt.setText("CONTENT: " + scanContent);
                         items[item_size++] = codes_name[i];
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 codes_name[i] + "  Added To Cart", Toast.LENGTH_SHORT);
                         toast.show();
-
+                        if(no_item>0) {
+                            ActionBar.Tab mTab = super.getSupportActionBar().getTabAt(1);
+                            mTab.setText(" CART  " +no_item);
+                        }
 
 /*
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -521,11 +524,17 @@ total=0;
     public void proceed_payment(View view)
     {
 
-        setContentView(R.layout.actionbar_tab_3);
+        Intent intent = new Intent(this, payement.class);
+        startActivity(intent);
     }
     public void offer_page(View view)
     {
         Intent intent = new Intent(this, offerpage.class);
+        startActivity(intent);
+    }
+    public void about_page(View view)
+    {
+        Intent intent = new Intent(this, aboutpage.class);
         startActivity(intent);
     }
 
