@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -25,9 +26,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +47,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private Button scanBtn;
     private TextView formatTxt, contentTxt,itemTxt,carttxt;
     public int a=-1,i,total=0,item_size=0;
-   // private String[] items = {"Cheese", "Pepperoni", "Black Olives"};
+
     private String[] items = new String[20];
-    public String[] codes = {"8901030554667", "8901361300889", "U1403085"};
-    public String[] codes_name = {"LUX", "SCOTCH BRITE", "NEIL"};
-    //private String[] cart = new String[20];
+    public String[] codes = {"8901030554667", "8901361300889", "U1403085","700465747143","U1402016","8902361042021"};
+    public String[] codes_name = {"LUX", "SCOTCH BRITE", "NEIL","MAAZA","ARJUN","NOTEBOOK"};
+
     ArrayList<String> cart = new ArrayList<String>();
     public String scanContent;
 
@@ -70,13 +73,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+       setContentView(R.layout.activity_main);
 
         //set title bar content and hide icon
-        getActionBar().setTitle(Html.fromHtml("<font color='#ffffff'><b>SCAN & PAY </b></font>"));
+
+        getActionBar().setTitle(Html.fromHtml("<font color='#ffffff'><b>LuPay </b></font>"));
         getActionBar().setIcon(
                 new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -101,16 +105,24 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 actionBar.setSelectedNavigationItem(position);
             }
         });
-
+        final int[] ICONS = new int[] {
+                R.mipmap.add1,
+                R.mipmap.crt1,
+                R.mipmap.crt1,
+                R.mipmap.crt1,
+        };
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
             // Create a tab with text corresponding to the page title defined by
             // the adapter. Also specify this Activity object, which implements
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
+
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            .setIcon(ICONS[i])
+
                             .setTabListener(this));
         }
 
@@ -121,6 +133,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -178,7 +191,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 break;
             case 2:
                 mViewPager.setCurrentItem(tab.getPosition());
-                setContentView(R.layout.actionbar_tab_3);
+                setContentView(R.layout.activity_main2);
+
+
                 break;
             case 3:
                 mViewPager.setCurrentItem(tab.getPosition());
@@ -251,109 +266,116 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
-            return 4;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "ADD ITEM";
+                    return "  ADD PRODUCT";
                 case 1:
-                    return "CART";
-                case 2:
-                    return "PAYMENT";
-                case 3:
-                    return "OFFERS";
+                    return "  CART";
+
             }
             return null;
         }
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
             scanContent = scanningResult.getContents();
-            String scanFormat = scanningResult.getFormatName();
-
-            Resources res = getResources();
-// For Alert Diaolog
-            int p=0;
-            for( i=0;i<codes.length;i++)
+           // String scanFormat = scanningResult.getFormatName();
+            if(scanContent==null)
             {
-                if(scanContent.equals(codes[i]))
-                {
-                    p=1;
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No Product Added To Cart", Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
+          else {
+                //  Resources res = getResources();
+// For Alert Diaolog
+                int p = 0;
+                for (i = 0; i < codes.length; i++) {
+                    if (scanContent.equals(codes[i])) {
+                        p = 1;
+
+                       // contentTxt.setText("CONTENT: " + scanContent);
+                        items[item_size++] = codes_name[i];
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                codes_name[i] + "  Added To Cart", Toast.LENGTH_SHORT);
+                        toast.show();
 
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("ARE YOU SURE YOU WANT TO ADD  : "+codes_name[i]);
-            builder1.setCancelable(true);
+/*
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                        builder1.setMessage("ARE YOU SURE YOU WANT TO ADD  : " + codes_name[i]);
+                        builder1.setCancelable(true);
 
-            builder1.setPositiveButton(
-                    "Add",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
+                        builder1.setPositiveButton(
+                                "Add",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
 
-                            //formatTxt.setText("FORMAT: " + items[0]);
+                                        //formatTxt.setText("FORMAT: " + items[0]);
 
-                            contentTxt.setText("CONTENT: " + scanContent);
-                            items[item_size++]=codes_name[i];
-                           // carttxt.setText(codes_name[i]+"----\n");
+                                        contentTxt.setText("CONTENT: " + scanContent);
+                                        items[item_size++] = codes_name[i];
+                                        // carttxt.setText(codes_name[i]+"----\n");
 
-                            //itemTxt.setText("CONTENT: " + items[1]);
-                        }
-                    });
+                                        //itemTxt.setText("CONTENT: " + items[1]);
+                                    }
+                                });
 
-            builder1.setNegativeButton(
-                    "No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();  */
 
-                    break;
+                        break;
+                    }
+
+                }
+                if (p == 0) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setMessage("No Product Found With Code : " + scanContent);
+                    builder1.setCancelable(true);
+
+
+                    builder1.setNegativeButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do something when click the negative button
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
                 }
 
+
             }
-            if(p==0)
-            {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setMessage("NO MATCH FOUND WITH CODE : " + scanContent);
-                builder1.setCancelable(true);
-
-
-                builder1.setNegativeButton(
-                        "OK",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do something when click the negative button
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-            }
-
-
-
-
-
 
 
         } else {
-//            Toast toast = Toast.makeText(getApplicationContext(),
-//                    "No scan data received!", Toast.LENGTH_SHORT);
-//            toast.show();
-            Toast.makeText(getApplicationContext(),
-                           "no data", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
+
+
         }
     }
     public void tab1(View view)
@@ -476,7 +498,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 45,
                 42,
                 55,
-                33
+                55,
+                65
         };
         carttxt = (TextView)findViewById(R.id.cart_content);
         int size = cart.size();
@@ -499,6 +522,11 @@ total=0;
     {
 
         setContentView(R.layout.actionbar_tab_3);
+    }
+    public void offer_page(View view)
+    {
+        Intent intent = new Intent(this, offerpage.class);
+        startActivity(intent);
     }
 
 }

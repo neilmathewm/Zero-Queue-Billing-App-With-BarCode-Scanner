@@ -2,18 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.sonyvaio.billapp.MainActivity">
-    <item
-        android:id="@+id/search"
-        android:orderInCategory="100"
-        android:title="search"
-        android:icon="@mipmap/search22"
 
-        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

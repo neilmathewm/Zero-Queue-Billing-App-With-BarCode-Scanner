@@ -6,21 +6,30 @@
         <item name="android:actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
         <item name="android:actionBarTabBarStyle">@style/Theme.MyAppTheme.ActionBar2</item>
 
-
+        <item name="@android:attr/actionBarTabTextStyle">@style/TabStyle</item>
 
     </style>
 
 
     <style name="Theme.MyAppTheme.ActionBar" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">#3b3c3d</item>
+        <item name="android:background">#131313</item>
 
-        <item name="android:height">40pt</item>
-
+        <item name="android:height">35pt</item>
     </style>
+
     <style name="Theme.MyAppTheme.ActionBar2" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">#3b3c3d</item>
+        <item name="android:background">#131313</item>
+    </style>
+
+
+    <!-- Modify the text color -->
+    <style name="TabStyle" parent="android:Widget.Holo.Light.ActionBar.TabText.Inverse">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
 
     </style>
+
+
 
 
 
