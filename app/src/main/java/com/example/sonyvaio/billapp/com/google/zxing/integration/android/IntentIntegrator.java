@@ -22,9 +22,9 @@ import java.util.Map;
 public class IntentIntegrator {
     public static final int REQUEST_CODE = 0x0000c0de; // Only use bottom 16 bits
     private static final String TAG = IntentIntegrator.class.getSimpleName();
-    public static final String DEFAULT_TITLE = "Install Barcode Scanner?";
+    public static final String DEFAULT_TITLE = "Additional Requirement";
     public static final String DEFAULT_MESSAGE =
-            "This application requires Barcode Scanner. Would you like to install it?";
+            "LuPay requires Barcode Scanner App(600 KB) to proceed. Would you like to install it now?";
     public static final String DEFAULT_YES = "Yes";
     public static final String DEFAULT_NO = "No";
     private static final String BS_PACKAGE = "com.google.zxing.client.android";
