@@ -1,13 +1,9 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -19,23 +15,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sonyvaio.billapp.com.google.zxing.integration.android.IntentIntegrator;
-import com.example.sonyvaio.billapp.com.google.zxing.integration.android.IntentResult;
+import com.neil.sonyvaio.billapp.com.google.zxing.integration.android.IntentIntegrator;
+import com.neil.sonyvaio.billapp.com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,8 +40,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public int a=-1,i,total=0,item_size=0,no_item=0;
 
     private String[] items = new String[20];
-    public String[] codes = {"8901030554667", "8901361300889", "U1403085","700465747143","U1402016","8902361042021"};
-    public String[] codes_name = {"LUX", "SCOTCH BRITE", "NEIL","MAAZA","ARJUN","NOTEBOOK"};
+    public String[] codes = {"8901030554667", "8901361300889", "U1403085","700465747143","U1402016","8901437002853","8901512140708","8902361042021"};
+    public String[] codes_name = {"LUX", "SCOTCH BRITE", "NEIL","MAAZA","ARJUN","PHILIPS LAMP","PEANUT BUTTER","NOTEBOOK"};
 
     ArrayList<String> cart = new ArrayList<String>();
     public String scanContent;
@@ -498,25 +489,25 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     {
         int[] price = new int[]{
                 35,
-                45,
+                250,
                 42,
-                55,
-                55,
+                20,
+                250,
                 65
         };
         carttxt = (TextView)findViewById(R.id.cart_content);
         int size = cart.size();
 total=0;
         carttxt.setText("\n-----------ITEMS ON YOUR CART----------- \n\n\n");
-        for(int i=0;i<size;i++) {
-            total=total+price[i];
-            carttxt.setText(carttxt.getText() +cart.get(i)+"----"+price[i]+"\n");
-        }
+//        for(int i=0;i<size;i++) {
+//            total=total+price[i];
+//            carttxt.setText(carttxt.getText() +cart.get(i)+"----"+price[i]+"\n");
+//        }
         for(int i=0;i<item_size;i++)
         {
 
-            carttxt.setText(carttxt.getText() +items[i]+"-----"+"25"+"\n");
-            total=total+25;
+            carttxt.setText(carttxt.getText() +items[i]+"-----"+price[i]+"\n");
+            total=total+price[i];
         }
         carttxt.setText(carttxt.getText()+"----------------------------------------\n");
         carttxt.setText(carttxt.getText()+" Total  = Rs "+total);

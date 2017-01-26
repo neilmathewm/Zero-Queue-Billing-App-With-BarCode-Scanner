@@ -1,4 +1,4 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

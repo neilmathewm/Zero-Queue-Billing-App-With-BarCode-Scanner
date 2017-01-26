@@ -1,4 +1,4 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

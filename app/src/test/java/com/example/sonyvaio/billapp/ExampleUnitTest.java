@@ -1,4 +1,4 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 import org.junit.Test;
 

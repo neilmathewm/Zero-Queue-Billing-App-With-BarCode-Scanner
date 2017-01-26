@@ -1,4 +1,4 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;

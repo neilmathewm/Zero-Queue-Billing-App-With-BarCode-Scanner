@@ -1,12 +1,10 @@
-package com.example.sonyvaio.billapp;
+package com.neil.sonyvaio.billapp;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.view.MenuItem;
-
-import com.example.sonyvaio.billapp.R;
 
 public class offerpage extends ActionBarActivity {
 

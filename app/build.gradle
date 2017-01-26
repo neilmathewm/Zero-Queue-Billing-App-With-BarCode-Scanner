@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.example.sonyvaio.billapp"
+        applicationId "com.neil.sonyvaio.billapp"
         minSdkVersion 10
         targetSdkVersion 19
         versionCode 1

@@ -1,4 +1,4 @@
-package com.example.sonyvaio.billapp.com.google.zxing.integration.android;
+package com.neil.sonyvaio.billapp.com.google.zxing.integration.android;
 
 
 public final class IntentResult {
